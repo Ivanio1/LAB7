@@ -23,7 +23,7 @@ public class ClientSide {
         } catch (NoSuchElementException e) {
             // для ctrl+D
         } catch (NullPointerException e) {
-            e.printStackTrace();
+           // e.printStackTrace();
             System.out.println("Ошибка регистрации. Такой пользователь уже существует. Авторизуйтесь заново.");
         }
     }

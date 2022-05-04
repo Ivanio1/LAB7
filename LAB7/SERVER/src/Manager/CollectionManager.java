@@ -1,10 +1,7 @@
 package Manager;
 
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.IOException;
-import java.io.Writer;
 import java.nio.channels.SelectionKey;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -358,7 +355,7 @@ public class CollectionManager {
                     try {
                         bdActivity.removeAt(name, pername, login);
                         if (Objects.equals(log, login)) {
-                            manager.getCol().remove(0);
+                            manager.getCol().remove(type);
                             poolSend.submit(new ServerSender(key, "Элемент удален, чтобы сохранить введите save."));
                         } else {
                             poolSend.submit(new ServerSender(key, "Объект вам не принадлежит."));
@@ -421,16 +418,21 @@ public class CollectionManager {
             CopyOnWriteArrayList<LabWork> works = manager.getCol();
             if (works.size() != 0) {
                 try {
-                    ArrayList names = new ArrayList<>();
+                    ArrayList<String> names = new ArrayList<>();
                     for (LabWork work : works) {
                         String a = work.getAuthor().getName();
                         names.add(a);
                     }
+                    String Max_name = "";
+                    for(int i=0;i< names.size();i++){
+                        if(names.get(i).length()>Max_name.length()){
+                            Max_name= names.get(i);
+                        }
+                    }
+                   //System.out.println(Max_name);
 
-                    Comparable name = Collections.max(names);
-                    String Max_name = name.toString();
                     for (LabWork work : works) {
-                        if (work.getAuthor().getName() == Max_name) {
+                        if (Objects.equals(work.getAuthor().getName(), Max_name)) {
                             s = work.toString();
                         }
                     }

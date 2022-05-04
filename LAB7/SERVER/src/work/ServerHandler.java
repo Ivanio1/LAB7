@@ -47,8 +47,8 @@ public class ServerHandler {
                 } else {
                     logger.info("Пользователь ввел неверный пароль");
                     logger.info("Завершение работы сервера.");
-                    forkJoinPool.submit(new ServerSender(key, "Введён неверный логин или пароль. У вас нет полномочий на сервере. Перезагрузите сервер и зайдите заново."));
-                    System.exit(0);
+                    forkJoinPool.submit(new ServerSender(key, "Введён неверный логин или пароль. У вас нет полномочий на сервере. Перезагрузите клиент и авторизуйтесь."));
+                    //System.exit(0);
                 }
             } else {
                 // System.out.println(command.getCommand());
